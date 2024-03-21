@@ -10,7 +10,7 @@ const ContentSwitcher = (props: IProps) => {
   return (
     <View style={styles.container}>
       {props.options.map((option: string) => (
-        <Pressable style={styles.button} onPress={() => props.onChange(option)}>
+        <Pressable key={option} style={styles.button} onPress={() => props.onChange(option)}>
           <Text
             style={[
               styles.btnText,
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   btnTextSelected: {
-    backgroundColor: '#31c1c3',
+    backgroundColor: '#029b9d',
     borderColor: 'white',
     borderRadius: 14,
     overflow: 'hidden'

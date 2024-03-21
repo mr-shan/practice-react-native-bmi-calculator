@@ -2,6 +2,7 @@ import { StyleSheet, TextInput, View, Text } from 'react-native';
 
 interface IProps {
   label: string;
+  value: string;
   unit: string;
   onChange: (text: string) => void;
 }
@@ -12,6 +13,7 @@ const Input = (props: IProps) => {
       <Text style={styles.inputLabel}>{props.label}: </Text>
       <View>
         <TextInput
+          value={props.value?.toString()}
           keyboardType='numeric'
           autoCapitalize='none'
           autoComplete='off'

@@ -6,12 +6,13 @@ import RadioButton from './RadioButton';
 
 interface IProps {
   label: string;
+  value: string;
   options: string[];
   onChange: (text: string) => void;
 }
 
 const RadioGroup = (props: IProps) => {
-  const [selected, setSelected] = useState(props.options[0]);
+  const [selected, setSelected] = useState(props.value);
 
   const radioPressHandler = (option: string) => {
     setSelected(option);

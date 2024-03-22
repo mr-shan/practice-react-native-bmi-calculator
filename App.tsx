@@ -50,5 +50,6 @@ export default function App() {
 const styles = StyleSheet.create({
   flexOne: {
     flex: 1,
+    backgroundColor: '#f0f0f0',
   },
 });

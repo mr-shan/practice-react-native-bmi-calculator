@@ -1,5 +1,5 @@
 import { LinearGradient } from 'expo-linear-gradient';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { ReactNode } from 'react';
 
 import { GRADIENT_COLORS } from '../helper/styles';
@@ -19,11 +19,14 @@ const GradientHoc = (props: IProps) => {
 const styles = StyleSheet.create({
   gradient: {
     // backgroundColor: '#00bb6e',
-    borderRadius: 30,
+    borderTopLeftRadius: 0,
+    borderTopRightRadius: 0,
+    borderRadius: 36,
     paddingTop: 70,
     alignItems: 'center',
     paddingBottom: 15,
     paddingHorizontal: 10,
+    elevation: 14
   },
 });
 

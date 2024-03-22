@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
   buttons: {
     flexDirection: 'row',
     gap: 20,
-    marginTop: 10,
+    marginTop: 5,
+    marginBottom: 3,
     padding: 10,
     paddingHorizontal: 25,
   },

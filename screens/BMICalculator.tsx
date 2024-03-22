@@ -3,10 +3,13 @@ import { useState } from 'react';
 
 import GradientHoc from '../components/GradientHoc';
 import Input from '../components/Input';
+import InputForFeetInches from '../components/InputForFeetInches';
 import RadioGroup from '../components/RadioGroup';
 import ContentSwitcher from '../components/ContentSwitcher';
 import ActionButtons from '../components/Calculator/ActionButtons';
 import Footer from '../components/Footer';
+
+import { validateInputs } from '../helper';
 
 interface IProps {
   onCalculateBMI: (
@@ -46,6 +49,8 @@ const BMICalculator = (props: IProps) => {
   };
   const unitsChangeHandler = (unitType: string) => {
     setUnitSet(unitType);
+    setHeight('');
+    setWeight('');
   };
   const resetHandler = () => {
     setAge('');
@@ -57,26 +62,18 @@ const BMICalculator = (props: IProps) => {
   const calculateHandler = () => {
     const parsedAge = parseFloat(age);
     const parsedHeight = parseFloat(height);
-    const parsedWeight = parseFloat(weight);
-    let errorMessage = ''
-    if (!(age && height && weight)) {
-      errorMessage = 'Please enter all the details.';
+    let parsedWeight = parseFloat(weight);
+    if (unitSet === 'Standard') {
+      parsedWeight /= 2.204623;
     }
-    if (isNaN(parsedAge)) {
-      errorMessage = 'The age you entered is not valid.';
-    }
-    if (isNaN(parsedHeight)) {
-      errorMessage = 'The height you entered is not valid.';
-    }
-    if (isNaN(parsedWeight)) {
-      errorMessage = 'The weight you entered is not valid.';
-    }
+    let errorMessage = validateInputs(parsedAge, parsedWeight, parsedHeight);
     if (errorMessage) {
       Alert.alert('Invalid Inputs', errorMessage)
       return;
     }
     props.onCalculateBMI(parsedAge, parsedHeight / 100, parsedWeight, gender);
   };
+  const HeightComponent = unitSet === 'Metric' ? Input : InputForFeetInches
   return (
     <View style={styles.container}>
       <GradientHoc>
@@ -93,16 +90,16 @@ const BMICalculator = (props: IProps) => {
             onChange={ageChangeHandler}
           />
           <Input
+            value={weight}
+            label='Weight'
+            unit={unitSet === 'Metric' ? 'kg' : 'pounds'}
+            onChange={weightChangeHandler}
+          />
+          <HeightComponent
             value={height}
             label='Height'
             unit='cm'
             onChange={heightChangeHandler}
-          />
-          <Input
-            value={weight}
-            label='Weight'
-            unit='kg'
-            onChange={weightChangeHandler}
           />
           <RadioGroup
             value={gender}
@@ -129,7 +126,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   inputs: {
-    marginTop: 16,
+    marginTop: 12,
     width: 320,
   },
   textInputWrapper: {

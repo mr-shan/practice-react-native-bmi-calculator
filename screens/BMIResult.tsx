@@ -56,7 +56,7 @@ export default BMIResult;
 
 const styles = StyleSheet.create({
   container: {
-    elevation: 5,
+    elevation: 10,
     shadowColor: 'black',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
@@ -83,14 +83,14 @@ const styles = StyleSheet.create({
     fontSize: 64,
     fontWeight: 'bold',
     textAlign: 'center',
-    marginBottom: 8,
+    marginBottom: 10,
   },
   category: {
     borderRadius: 10,
     shadowColor: 'black',
     shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0.3,
-    shadowRadius: 10,
+    shadowOpacity: 0.2,
+    shadowRadius: 8,
   },
   categoryText: {
     borderRadius: 25,
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
   },
   homeButton: {
     marginTop: 25,
-    marginBottom: 5,
+    marginBottom: 14,
     width: 120,
   },
   homeButtonContent: {

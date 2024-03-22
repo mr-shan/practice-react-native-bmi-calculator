@@ -11,10 +11,10 @@ const ActionButtons = (props: IProps) => {
   return (
     <View style={styles.buttons}>
       <View style={{ flex: 1 }}>
-        <Button size='large' title='Reset' variant='outlined' onPress={props.onReset}/>
+        <Button size='medium' title='Reset' variant='outlined' onPress={props.onReset}/>
       </View>
       <View style={{ flex: 1 }}>
-        <Button size='large' title='Calculate' onPress={props.onCalculate}/>
+        <Button size='medium' title='Calculate' onPress={props.onCalculate}/>
       </View>
     </View>
   );

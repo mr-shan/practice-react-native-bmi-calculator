@@ -39,7 +39,12 @@ const BMIResult = (props: IProps) => {
         </View>
         <BMIChart selected={bmiCategory.type}/>
         <View style={styles.homeButton}>
-          <Button title='Back to Home' onPress={props.onBackClick}></Button>
+          <Button variant='default' onPress={props.onBackClick}>
+            <View style={styles.homeButtonContent}>
+            <Image style={styles.homeButtonImage} source={require('./../assets/home.png')}/>
+            <Text style={styles.homeButtonText}>Home</Text>
+            </View>
+          </Button>
         </View>
       </GradientHoc>
       <Footer />
@@ -60,7 +65,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
-    marginTop: 10,
     width: 250,
     gap: 20,
   },
@@ -100,6 +104,21 @@ const styles = StyleSheet.create({
   homeButton: {
     marginTop: 25,
     marginBottom: 5,
-    width: 180,
+    width: 120,
   },
+  homeButtonContent: {
+    flexDirection: 'row',
+    gap: 8,
+    paddingVertical: 12,
+    alignItems: 'center'
+  },
+  homeButtonText: {
+    color: '#00bb6e',
+    fontSize: 16,
+    fontWeight: 'bold'
+  },
+  homeButtonImage: {
+    height: 16,
+    width: 16,
+  }
 });

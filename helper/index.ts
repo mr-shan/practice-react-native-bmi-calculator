@@ -20,5 +20,25 @@ export const calculateBMI = (
     throw new Error('Invalid age or gender');
   }
 
-  return parseFloat(bmi.toFixed(2));
+  const result = Math.round(bmi * 10) / 10
+
+  return result;
+};
+
+interface IBmiCategoryData {
+  type: string;
+  background: string;
+  textColor: string;
+}
+
+export const getBmiCategoryData = (bmi: number): IBmiCategoryData => {
+  if (bmi < 18.5) {
+    return { type: 'Underweight', background: '#2db7c3', textColor: 'white' };
+  } else if (bmi < 24.9) {
+    return { type: 'Healthy Weight', background: '#00bb6e', textColor: 'white' };
+  } else if (bmi < 29.9) {
+    return { type: 'Overweight', background: '#ffc800', textColor: '#666' };
+  } else {
+    return { type: 'Obesity', background: '#f65858', textColor: 'white' };
+  }
 };

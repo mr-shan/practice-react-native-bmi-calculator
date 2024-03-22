@@ -1,0 +1,1 @@
+export const GRADIENT_COLORS = ['#008e9b', '#00bbae', '#00bb92', '#00bb6e'];

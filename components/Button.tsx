@@ -1,10 +1,12 @@
 import { Pressable, View, Text, StyleSheet } from 'react-native';
+import { ReactNode } from 'react';
 
 interface IProps {
-  title: string;
+  title?: string;
   size?: 'small' | 'medium' | 'large';
   variant?: 'primary' | 'default' | 'danger' | 'text' | 'outlined';
   disabled?: boolean;
+  children?: ReactNode;
   onPress?: () => void;
 }
 
@@ -46,6 +48,7 @@ const Button = (props: IProps) => {
     case 'text':
       viewStyle = { ...viewStyle };
       textStyle = { ...textStyle, ...styles.textText };
+      break;
     case 'outlined':
       viewStyle = { ...viewStyle, ...styles.outlinedView };
       textStyle = { ...textStyle, ...styles.primaryText };
@@ -60,7 +63,8 @@ const Button = (props: IProps) => {
         disabled={props.disabled}
         style={(props) => props.pressed && styles.pressable_ios}
       >
-        <Text style={textStyle}>{props.title}</Text>
+        {props.children && <View style={styles.childrenView}>{props.children}</View>}
+        {props.title && <Text style={textStyle}>{props.title}</Text>}
       </Pressable>
     </View>
   );
@@ -88,6 +92,9 @@ const styles = StyleSheet.create({
   },
   dangerView: {
     backgroundColor: '#fe4444',
+  },
+  textView: {
+    borderWidth: 0
   },
   pressable_ios: {
     opacity: 0.5,
@@ -122,4 +129,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     padding: 12,
   },
+  childrenView: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  }
 });

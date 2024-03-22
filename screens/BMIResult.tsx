@@ -1,27 +1,47 @@
-import { StyleSheet, View, Text } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import { StyleSheet, View, Text, Image } from 'react-native';
 
+import GradientHoc from '../components/GradientHoc';
+import BMIChart from '../components/Result/BmiChart';
 import Footer from '../components/Footer';
+import Button from '../components/Button';
+
+import { getBmiCategoryData } from '../helper';
 
 interface IProps {
   bmi: number;
+  onBackClick: () => void;
 }
 
 const BMIResult = (props: IProps) => {
+  if (!props.bmi) {
+    props.onBackClick();
+    return <></>;
+  }
+
+  const bmiCategory = getBmiCategoryData(props.bmi);
+
+  const categoryStyle = {
+    backgroundColor: bmiCategory.background,
+    color: bmiCategory.textColor,
+  };
+
   return (
     <View style={styles.container}>
-      <LinearGradient
-        style={styles.gradient}
-        colors={['#008e9b', '#00bbae', '#00bb92', '#00bb6e']}
-      >
+      <GradientHoc>
         <View style={styles.header}>
           <Text style={styles.headerInfo}>Your body mass index is:</Text>
           <Text style={styles.headerTitle}>{props.bmi}</Text>
           <View style={styles.category}>
-            <Text style={styles.categoryText}>Overweight</Text>
+            <Text style={[styles.categoryText, categoryStyle]}>
+              {bmiCategory.type}
+            </Text>
           </View>
         </View>
-      </LinearGradient>
+        <BMIChart selected={bmiCategory.type}/>
+        <View style={styles.homeButton}>
+          <Button title='Back to Home' onPress={props.onBackClick}></Button>
+        </View>
+      </GradientHoc>
       <Footer />
     </View>
   );
@@ -39,32 +59,30 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     flex: 1,
   },
-  gradient: {
-    // backgroundColor: '#00bb6e',
-    borderRadius: 30,
-    paddingTop: 90,
-    alignItems: 'center',
-    paddingBottom: 25,
-    paddingHorizontal: 10,
-  },
   header: {
+    marginTop: 10,
     width: 250,
-    gap: 20
+    gap: 20,
   },
   headerInfo: {
     color: '#eee',
     fontSize: 18,
     textAlign: 'center',
   },
+  backButton: {
+    height: 30,
+    width: 30,
+    backgroundColor: 'transparent',
+  },
   headerTitle: {
     color: 'white',
     fontSize: 64,
     fontWeight: 'bold',
     textAlign: 'center',
+    marginBottom: 8,
   },
   category: {
     borderRadius: 10,
-    elevation: 5,
     shadowColor: 'black',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.3,
@@ -72,12 +90,16 @@ const styles = StyleSheet.create({
   },
   categoryText: {
     borderRadius: 25,
+    elevation: 15,
     overflow: 'hidden',
     paddingVertical: 14,
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: 20,
-    backgroundColor: '#ffc800',
-    color: '#666',
-  }
+  },
+  homeButton: {
+    marginTop: 25,
+    marginBottom: 5,
+    width: 180,
+  },
 });

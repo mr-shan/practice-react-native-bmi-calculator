@@ -40,6 +40,7 @@ const styles = StyleSheet.create({
     color: '#eee',
     fontSize: 24,
     fontWeight: 'bold',
+    marginTop: 10,
   },
   textInput: {
     borderBottomColor: '#eee',

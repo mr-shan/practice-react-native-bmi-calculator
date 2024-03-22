@@ -1,7 +1,7 @@
 import { StyleSheet, View, Alert } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import { useState } from 'react';
 
+import GradientHoc from '../components/GradientHoc';
 import Input from '../components/Input';
 import RadioGroup from '../components/RadioGroup';
 import ContentSwitcher from '../components/ContentSwitcher';
@@ -79,7 +79,7 @@ const BMICalculator = (props: IProps) => {
   };
   return (
     <View style={styles.container}>
-      <LinearGradient style={styles.gradient} colors={['#008e9b', '#00bbae', '#00bb92', '#00bb6e']}>
+      <GradientHoc>
         <ContentSwitcher
           selected={unitSet}
           onChange={unitsChangeHandler}
@@ -112,7 +112,7 @@ const BMICalculator = (props: IProps) => {
           />
         </View>
         <ActionButtons onCalculate={calculateHandler} onReset={resetHandler} />
-      </LinearGradient>
+      </GradientHoc>
       <Footer />
     </View>
   );
@@ -127,14 +127,6 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     justifyContent: 'space-between',
     flex: 1,
-  },
-  gradient: {
-    // backgroundColor: '#00bb6e',
-    borderRadius: 30,
-    paddingTop: 70,
-    alignItems: 'center',
-    paddingBottom: 15,
-    paddingHorizontal: 10,
   },
   inputs: {
     marginTop: 16,

@@ -9,8 +9,8 @@ import BMIResult from './screens/BMIResult';
 import { calculateBMI } from './helper';
 
 export default function App() {
-  const [appState, setAppState] = useState(1);
-  const [bmi, setBmi] = useState<null | number>(25);
+  const [appState, setAppState] = useState(0);
+  const [bmi, setBmi] = useState<null | number>(null);
 
   const onCalculateBMI = (
     age: number,

@@ -1,4 +1,4 @@
-import { StyleSheet, View, Alert } from 'react-native';
+import { StyleSheet, View, Alert, SafeAreaView } from 'react-native';
 import { useState } from 'react';
 
 import GradientHoc from '../components/GradientHoc';
@@ -68,47 +68,52 @@ const BMICalculator = (props: IProps) => {
     }
     let errorMessage = validateInputs(parsedAge, parsedWeight, parsedHeight);
     if (errorMessage) {
-      Alert.alert('Invalid Inputs', errorMessage)
+      Alert.alert('Invalid Inputs', errorMessage);
       return;
     }
     props.onCalculateBMI(parsedAge, parsedHeight / 100, parsedWeight, gender);
   };
-  const HeightComponent = unitSet === 'Metric' ? Input : InputForFeetInches
+  const HeightComponent = unitSet === 'Metric' ? Input : InputForFeetInches;
   return (
     <View style={styles.container}>
       <GradientHoc>
-        <ContentSwitcher
-          selected={unitSet}
-          onChange={unitsChangeHandler}
-          options={['Standard', 'Metric']}
-        />
-        <View style={styles.inputs}>
-          <Input
-            value={age}
-            label='Age'
-            unit='years'
-            onChange={ageChangeHandler}
+        <SafeAreaView style={styles.safeAreaView}>
+          <ContentSwitcher
+            selected={unitSet}
+            onChange={unitsChangeHandler}
+            options={['Standard', 'Metric']}
           />
-          <Input
-            value={weight}
-            label='Weight'
-            unit={unitSet === 'Metric' ? 'kg' : 'pounds'}
-            onChange={weightChangeHandler}
+          <View style={styles.inputs}>
+            <Input
+              value={age}
+              label='Age'
+              unit='years'
+              onChange={ageChangeHandler}
+            />
+            <Input
+              value={weight}
+              label='Weight'
+              unit={unitSet === 'Metric' ? 'kg' : 'pounds'}
+              onChange={weightChangeHandler}
+            />
+            <HeightComponent
+              value={height}
+              label='Height'
+              unit='cm'
+              onChange={heightChangeHandler}
+            />
+            <RadioGroup
+              value={gender}
+              label='Gender'
+              options={['Male', 'Female']}
+              onChange={genderChangeHandler}
+            />
+          </View>
+          <ActionButtons
+            onCalculate={calculateHandler}
+            onReset={resetHandler}
           />
-          <HeightComponent
-            value={height}
-            label='Height'
-            unit='cm'
-            onChange={heightChangeHandler}
-          />
-          <RadioGroup
-            value={gender}
-            label='Gender'
-            options={['Male', 'Female']}
-            onChange={genderChangeHandler}
-          />
-        </View>
-        <ActionButtons onCalculate={calculateHandler} onReset={resetHandler} />
+        </SafeAreaView>
       </GradientHoc>
       <Footer />
     </View>
@@ -126,7 +131,6 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   inputs: {
-    marginTop: 12,
     width: 320,
   },
   textInputWrapper: {
@@ -157,6 +161,10 @@ const styles = StyleSheet.create({
     fontSize: 18,
     alignSelf: 'flex-end',
   },
+  safeAreaView: {
+    paddingTop: 50,
+    alignItems: 'center',
+  }
 });
 
 export default BMICalculator;

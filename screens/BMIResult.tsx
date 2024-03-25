@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, Image } from 'react-native';
+import { StyleSheet, View, Text, Image, SafeAreaView } from 'react-native';
 
 import GradientHoc from '../components/GradientHoc';
 import BMIChart from '../components/Result/BmiChart';
@@ -28,24 +28,29 @@ const BMIResult = (props: IProps) => {
   return (
     <View style={styles.container}>
       <GradientHoc>
-        <View style={styles.header}>
-          <Text style={styles.headerInfo}>Your body mass index is:</Text>
-          <Text style={styles.headerTitle}>{props.bmi}</Text>
-          <View style={styles.category}>
-            <Text style={[styles.categoryText, categoryStyle]}>
-              {bmiCategory.type}
-            </Text>
-          </View>
-        </View>
-        <BMIChart selected={bmiCategory.type}/>
-        <View style={styles.homeButton}>
-          <Button variant='default' onPress={props.onBackClick}>
-            <View style={styles.homeButtonContent}>
-            <Image style={styles.homeButtonImage} source={require('./../assets/home.png')}/>
-            <Text style={styles.homeButtonText}>Home</Text>
+        <SafeAreaView style={styles.safeAreaView}>
+          <View style={styles.header}>
+            <Text style={styles.headerInfo}>Your body mass index is:</Text>
+            <Text style={styles.headerTitle}>{props.bmi}</Text>
+            <View style={styles.category}>
+              <Text style={[styles.categoryText, categoryStyle]}>
+                {bmiCategory.type}
+              </Text>
             </View>
-          </Button>
-        </View>
+          </View>
+          <BMIChart selected={bmiCategory.type} />
+          <View style={styles.homeButton}>
+            <Button variant='default' onPress={props.onBackClick}>
+              <View style={styles.homeButtonContent}>
+                <Image
+                  style={styles.homeButtonImage}
+                  source={require('./../assets/home.png')}
+                />
+                <Text style={styles.homeButtonText}>Home</Text>
+              </View>
+            </Button>
+          </View>
+        </SafeAreaView>
       </GradientHoc>
       <Footer />
     </View>
@@ -102,23 +107,27 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   homeButton: {
-    marginTop: 25,
-    marginBottom: 14,
+    marginTop: 18,
+    marginBottom: 22,
     width: 120,
   },
   homeButtonContent: {
     flexDirection: 'row',
     gap: 8,
     paddingVertical: 12,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   homeButtonText: {
     color: '#00bb6e',
     fontSize: 16,
-    fontWeight: 'bold'
+    fontWeight: 'bold',
   },
   homeButtonImage: {
     height: 16,
     width: 16,
-  }
+  },
+  safeAreaView: {
+    paddingTop: 50,
+    alignItems: 'center',
+  },
 });

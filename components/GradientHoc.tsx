@@ -22,10 +22,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
     borderRadius: 36,
-    paddingTop: 70,
-    alignItems: 'center',
-    paddingBottom: 15,
-    paddingHorizontal: 10,
     elevation: 14
   },
 });

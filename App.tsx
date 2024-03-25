@@ -36,12 +36,15 @@ export default function App() {
     setAppState(0);
   };
 
+  let CurrentScreen = <BMICalculator onCalculateBMI={onCalculateBMI} />
+
+  if (appState === 1 && bmi !== null) {
+    CurrentScreen = <BMIResult bmi={bmi} onBackClick={backToCalculator} />
+  }
+
   return (
     <View style={styles.flexOne}>
-      {appState === 0 && <BMICalculator onCalculateBMI={onCalculateBMI} />}
-      {appState === 1 && bmi !== null && (
-        <BMIResult bmi={bmi} onBackClick={backToCalculator} />
-      )}
+      { CurrentScreen }
       <StatusBar style='dark' />
     </View>
   );

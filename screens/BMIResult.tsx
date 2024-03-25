@@ -63,7 +63,7 @@ export default BMIResult;
 const styles = StyleSheet.create({
   container: {
     elevation: 10,
-    shadowColor: 'black',
+    shadowColor: COLORS.shadow,
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 10,
@@ -71,11 +71,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   header: {
+    marginTop: 20,
     width: 250,
     gap: 20,
   },
   headerInfo: {
-    color: '#eee',
+    color: COLORS.text,
     fontSize: 18,
     textAlign: 'center',
   },
@@ -85,7 +86,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'transparent',
   },
   headerTitle: {
-    color: 'white',
+    color: COLORS.bgLight,
     fontSize: 64,
     fontWeight: 'bold',
     textAlign: 'center',
@@ -93,7 +94,7 @@ const styles = StyleSheet.create({
   },
   category: {
     borderRadius: 10,
-    shadowColor: 'black',
+    shadowColor: COLORS.shadow,
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.2,
     shadowRadius: 8,
@@ -128,7 +129,6 @@ const styles = StyleSheet.create({
     width: 16,
   },
   safeAreaView: {
-    paddingTop: 50,
     alignItems: 'center',
   },
 });

@@ -1,4 +1,5 @@
 import { StyleSheet, Pressable, View, Text } from 'react-native';
+import COLORS from '../constants/colors';
 
 interface IProps {
   label: string;
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
   },
   radioButton: {
     borderRadius: 20,
-    borderColor: 'white',
+    borderColor: COLORS.bgLight,
     borderWidth: 2,
     padding: 2,
     width: 20,
@@ -44,11 +45,11 @@ const styles = StyleSheet.create({
   radioSelected: {
     width: '100%',
     height: '100%',
-    backgroundColor: 'white',
+    backgroundColor: COLORS.bgLight,
     borderRadius: 20,
   },
   radioLabel: {
-    color: 'white',
+    color: COLORS.bgLight,
     fontSize: 18,
   },
 });

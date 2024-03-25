@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   inputLabel: {
-    color: COLORS.bgLight,
+    color: COLORS.text,
     fontSize: 24,
     fontWeight: 'bold',
     marginTop: 10,
@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     paddingVertical: 5,
     textAlign: 'center',
-    color: 'white',
+    color: COLORS.bgLight,
     width: 120,
     marginHorizontal: 5,
   },

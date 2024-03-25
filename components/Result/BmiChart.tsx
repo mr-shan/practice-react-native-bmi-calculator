@@ -9,7 +9,7 @@ const BMIChart = (props: IProps) => {
   return (
     <View style={styles.bmiChart}>
       <Text style={{ textAlign: 'center', color: COLORS.text }}>BMI Chart</Text>
-      <View style={{ borderBottomColor: '#ccc', borderBottomWidth: 1 }}></View>
+      <View style={{ borderBottomColor: COLORS.border, borderBottomWidth: 1 }}></View>
       <View style={[styles.bmiChartItem, props.selected === 'Underweight' ? styles.selected : {}]}>
         <Text style={styles.bmiChartItemText}>Below 18.5</Text>
         <Text style={styles.bmiChartItemText}>Underweight</Text>
@@ -26,7 +26,7 @@ const BMIChart = (props: IProps) => {
         <Text style={styles.bmiChartItemText}>30 or higher</Text>
         <Text style={styles.bmiChartItemText}>Obesity</Text>
       </View>
-      <View style={{ borderBottomColor: '#ccc', borderBottomWidth: 1 }}></View>
+      <View style={{ borderBottomColor: COLORS.border, borderBottomWidth: 1 }}></View>
     </View>
   );
 };
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10
   },
   bmiChartItemText: {
-    color: '#eee',
+    color: COLORS.text,
     fontSize: 18,
     fontWeight: '500',
   },
@@ -55,6 +55,6 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 5,
     borderRadius: 16,
-    borderColor: '#ddd',
+    borderColor: COLORS.border,
   }
 });

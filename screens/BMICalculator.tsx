@@ -164,7 +164,6 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
   },
   safeAreaView: {
-    paddingTop: 50,
     alignItems: 'center',
   }
 });

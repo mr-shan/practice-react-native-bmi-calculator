@@ -9,6 +9,8 @@ import ContentSwitcher from '../components/ContentSwitcher';
 import ActionButtons from '../components/Calculator/ActionButtons';
 import Footer from '../components/Footer';
 
+import COLORS from '../constants/colors';
+
 import { validateInputs } from '../helper';
 
 interface IProps {
@@ -140,24 +142,24 @@ const styles = StyleSheet.create({
     width: 200,
   },
   inputLabel: {
-    color: 'white',
+    color: COLORS.bgLight,
     fontSize: 24,
     fontWeight: 'bold',
     flex: 1,
   },
   textInput: {
-    borderBottomColor: '#eee',
+    borderBottomColor: COLORS.text,
     borderBottomWidth: 1,
     fontSize: 24,
     fontWeight: 'bold',
     paddingHorizontal: 10,
     textAlign: 'center',
-    color: 'white',
+    color: COLORS.bgLight,
     width: 60,
     marginHorizontal: 5,
   },
   inputUnit: {
-    color: '#eee',
+    color: COLORS.text,
     fontSize: 18,
     alignSelf: 'flex-end',
   },

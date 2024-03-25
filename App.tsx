@@ -7,6 +7,7 @@ import BMICalculator from './screens/BMICalculator';
 import BMIResult from './screens/BMIResult';
 
 import { calculateBMI } from './helper';
+import COLORS from './constants/colors';
 
 export default function App() {
   const [appState, setAppState] = useState(0);
@@ -53,6 +54,6 @@ export default function App() {
 const styles = StyleSheet.create({
   flexOne: {
     flex: 1,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: COLORS.bgLight,
   },
 });

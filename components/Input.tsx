@@ -1,5 +1,7 @@
 import { StyleSheet, TextInput, View, Text } from 'react-native';
 
+import COLORS from '../constants/colors';
+
 interface IProps {
   label: string;
   value: string;
@@ -37,13 +39,13 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   inputLabel: {
-    color: '#eee',
+    color: COLORS.bgLight,
     fontSize: 24,
     fontWeight: 'bold',
     marginTop: 10,
   },
   textInput: {
-    borderBottomColor: '#eee',
+    borderBottomColor: COLORS.bgLight,
     borderBottomWidth: 1,
     fontSize: 36,
     fontWeight: 'bold',
@@ -55,7 +57,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 5,
   },
   inputUnit: {
-    color: '#eee',
+    color: COLORS.bgLight,
     fontSize: 18,
     alignSelf: 'flex-end',
   },

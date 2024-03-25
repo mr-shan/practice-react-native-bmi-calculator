@@ -1,6 +1,8 @@
 import { Pressable, View, Text, StyleSheet } from 'react-native';
 import { ReactNode } from 'react';
 
+import COLORS from '../constants/colors';
+
 interface IProps {
   title?: string;
   size?: 'small' | 'medium' | 'large';
@@ -78,20 +80,20 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   primaryView: {
-    backgroundColor: '#00bb6e',
+    backgroundColor: COLORS.primary500,
   },
   outlinedView: {
     backgroundColor: 'transparent',
-    borderColor: 'white',
+    borderColor: COLORS.bgLight,
     borderWidth: 2,
   },
   defaultView: {
-    backgroundColor: 'white',
-    borderColor: 'white',
+    backgroundColor: COLORS.bgLight,
+    borderColor: COLORS.bgLight,
     borderWidth: 2,
   },
   dangerView: {
-    backgroundColor: '#fe4444',
+    backgroundColor: COLORS.bgDanger,
   },
   textView: {
     borderWidth: 0
@@ -106,16 +108,16 @@ const styles = StyleSheet.create({
     letterSpacing: 0.25,
   },
   primaryText: {
-    color: 'white',
+    color: COLORS.bgLight,
   },
   defaultText: {
-    color: '#00bb6e',
+    color: COLORS.primary500,
   },
   dangerText: {
-    color: 'white',
+    color: COLORS.bgLight,
   },
   textText: {
-    color: '#00bb6e',
+    color: COLORS.primary500,
   },
   smallText: {
     fontSize: 12,

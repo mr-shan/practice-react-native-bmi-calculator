@@ -18,7 +18,6 @@ const GradientHoc = (props: IProps) => {
 
 const styles = StyleSheet.create({
   gradient: {
-    // backgroundColor: '#00bb6e',
     borderTopLeftRadius: 0,
     borderTopRightRadius: 0,
     borderRadius: 36,

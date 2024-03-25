@@ -6,6 +6,7 @@ import Footer from '../components/Footer';
 import Button from '../components/Button';
 
 import { getBmiCategoryData } from '../helper';
+import COLORS from '../constants/colors';
 
 interface IProps {
   bmi: number;
@@ -118,7 +119,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   homeButtonText: {
-    color: '#00bb6e',
+    color: COLORS.primary500,
     fontSize: 16,
     fontWeight: 'bold',
   },

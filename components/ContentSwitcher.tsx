@@ -1,4 +1,5 @@
 import { View, Pressable, Text, StyleSheet } from 'react-native';
+import COLORS from '../constants/colors';
 
 interface IProps {
   options: string[];
@@ -30,7 +31,7 @@ export default ContentSwitcher;
 const styles = StyleSheet.create({
   container: {
     borderRadius: 50,
-    borderColor: 'white',
+    borderColor: COLORS.bgLight,
     borderWidth: 1,
     flexDirection: 'row',
     justifyContent: 'center',
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
   },
   btnText: {
     fontSize: 14,
-    color: 'white',
+    color: COLORS.bgLight,
     paddingVertical: 5,
     textAlign: 'center',
     borderColor: 'transparent',
@@ -50,7 +51,7 @@ const styles = StyleSheet.create({
   },
   btnTextSelected: {
     backgroundColor: '#029b9d',
-    borderColor: 'white',
+    borderColor: COLORS.bgLight,
     borderRadius: 14,
     overflow: 'hidden'
   },

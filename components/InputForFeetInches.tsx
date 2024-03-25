@@ -1,5 +1,6 @@
 import { StyleSheet, TextInput, View, Text } from 'react-native';
 import { useState, useEffect } from 'react';
+import COLORS from '../constants/colors';
 
 interface IProps {
   label: string;
@@ -69,25 +70,25 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   inputLabel: {
-    color: '#eee',
+    color: COLORS.text,
     fontSize: 24,
     fontWeight: 'bold',
     marginTop: 10,
   },
   textInput: {
-    borderBottomColor: '#eee',
+    borderBottomColor: COLORS.text,
     borderBottomWidth: 1,
     fontSize: 36,
     fontWeight: 'bold',
     paddingHorizontal: 10,
     paddingVertical: 5,
     textAlign: 'center',
-    color: 'white',
+    color: COLORS.bgLight,
     width: 56,
     marginHorizontal: 5,
   },
   inputUnit: {
-    color: '#eee',
+    color: COLORS.text,
     fontSize: 18,
     alignSelf: 'flex-end',
     marginRight: 5

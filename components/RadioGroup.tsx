@@ -3,6 +3,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import { useState } from 'react';
 
 import RadioButton from './RadioButton';
+import COLORS from '../constants/colors';
 
 interface IProps {
   label: string;
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
     gap: 10,
   },
   inputLabel: {
-    color: '#eee',
+    color: COLORS.text,
     fontSize: 24,
     fontWeight: 'bold',
   },

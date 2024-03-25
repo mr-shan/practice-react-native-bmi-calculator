@@ -1,3 +1,5 @@
+import COLORS from '../constants/colors';
+
 export const calculateBMI = (
   weightInKg: number,
   heightInMeters: number,
@@ -35,11 +37,11 @@ export const getBmiCategoryData = (bmi: number): IBmiCategoryData => {
   if (bmi <= 18.5) {
     return { type: 'Underweight', background: '#2db7c3', textColor: 'white' };
   } else if (bmi <= 24.9) {
-    return { type: 'Healthy Weight', background: '#00bb6e', textColor: 'white' };
+    return { type: 'Healthy Weight', background: COLORS.primary500, textColor: 'white' };
   } else if (bmi <= 29.9) {
-    return { type: 'Overweight', background: '#ffc800', textColor: '#666' };
+    return { type: 'Overweight', background: COLORS.bgWarning, textColor: '#666' };
   } else {
-    return { type: 'Obesity', background: '#f65858', textColor: 'white' };
+    return { type: 'Obesity', background: COLORS.bgDanger, textColor: 'white' };
   }
 };
 

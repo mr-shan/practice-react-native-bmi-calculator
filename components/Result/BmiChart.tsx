@@ -1,4 +1,5 @@
 import { StyleSheet, View, Text } from 'react-native';
+import COLORS from '../../constants/colors';
 
 interface IProps {
   selected: string
@@ -7,7 +8,7 @@ interface IProps {
 const BMIChart = (props: IProps) => {
   return (
     <View style={styles.bmiChart}>
-      <Text style={{ textAlign: 'center', color: '#eee' }}>BMI Chart</Text>
+      <Text style={{ textAlign: 'center', color: COLORS.text }}>BMI Chart</Text>
       <View style={{ borderBottomColor: '#ccc', borderBottomWidth: 1 }}></View>
       <View style={[styles.bmiChartItem, props.selected === 'Underweight' ? styles.selected : {}]}>
         <Text style={styles.bmiChartItemText}>Below 18.5</Text>

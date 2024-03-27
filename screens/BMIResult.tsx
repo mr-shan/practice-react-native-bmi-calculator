@@ -5,6 +5,8 @@ import {
   Dimensions,
   SafeAreaView,
   Platform,
+  useWindowDimensions,
+  StyleProp,
 } from 'react-native';
 
 import GradientHoc from '../components/GradientHoc';
@@ -26,7 +28,7 @@ const BMIResult = (props: IProps) => {
     props.onBackClick();
     return <></>;
   }
-
+  const windowDimensions = useWindowDimensions();
   const bmiCategory = getBmiCategoryData(props.bmi);
 
   const categoryStyle = {
@@ -34,10 +36,24 @@ const BMIResult = (props: IProps) => {
     color: bmiCategory.textColor,
   };
 
+  const orientation =
+    windowDimensions.height > windowDimensions.width ? 'portrait' : 'landscape';
+
+  const containerStyle: StyleProp<any> =
+    orientation === 'landscape'
+      ? {
+          flexDirection: 'row',
+          justifyContent: 'space-evenly',
+          paddingBottom: 20,
+        }
+      : {
+          flexDirection: 'column',
+        };
+
   return (
     <View style={styles.container}>
       <GradientHoc>
-        <SafeAreaView style={styles.safeAreaView}>
+        <SafeAreaView style={[styles.safeAreaView, containerStyle]}>
           <View style={styles.header}>
             <Text style={styles.headerInfo}>Your body mass index is:</Text>
             <Text style={styles.headerTitle}>{props.bmi}</Text>
@@ -58,7 +74,7 @@ const BMIResult = (props: IProps) => {
           </View>
         </SafeAreaView>
       </GradientHoc>
-      <Footer />
+      {orientation === 'portrait' && <Footer />}
     </View>
   );
 };

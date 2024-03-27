@@ -4,9 +4,10 @@ import {
   Alert,
   SafeAreaView,
   KeyboardAvoidingView,
-  Dimensions,
+  useWindowDimensions,
   ScrollView,
   Platform,
+  StyleProp
 } from 'react-native';
 import { useState } from 'react';
 
@@ -37,6 +38,7 @@ const BMICalculator = (props: IProps) => {
   const [height, setHeight] = useState<string>('');
   const [weight, setWeight] = useState<string>('');
   const [gender, setGender] = useState('Male');
+  const windowDimensions = useWindowDimensions();
 
   const parseNumberAndSetProperty = (
     numStr: string,
@@ -87,8 +89,18 @@ const BMICalculator = (props: IProps) => {
 
   const HeightComponent = unitSet === 'Metric' ? Input : InputForFeetInches;
 
+  const orientation =
+    windowDimensions.height > windowDimensions.width ? 'portrait' : 'landscape';
+
+  const containerStyle: StyleProp<any> = orientation === 'landscape' ? {
+    flexDirection: 'row',
+  } : {
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  }
+
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, containerStyle]}>
       <ScrollView style={styles.screen} bounces={false}>
         <KeyboardAvoidingView
           style={[
@@ -138,7 +150,7 @@ const BMICalculator = (props: IProps) => {
           </GradientHoc>
         </KeyboardAvoidingView>
       </ScrollView>
-      <Footer />
+      {orientation === 'portrait' && <Footer />}
     </View>
   );
 };
@@ -153,7 +165,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 10,
     flex: 1,
-    justifyContent: 'space-between',
   },
   inputs: {
     width: 320,

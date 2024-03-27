@@ -1,9 +1,17 @@
-import { StyleSheet, View, Text, Image, SafeAreaView } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Text,
+  Dimensions,
+  SafeAreaView,
+  Platform,
+} from 'react-native';
 
 import GradientHoc from '../components/GradientHoc';
 import BMIChart from '../components/Result/BmiChart';
 import Footer from '../components/Footer';
 import Button from '../components/Button';
+import { AntDesign } from '@expo/vector-icons';
 
 import { getBmiCategoryData } from '../helper';
 import COLORS from '../constants/colors';
@@ -43,10 +51,7 @@ const BMIResult = (props: IProps) => {
           <View style={styles.homeButton}>
             <Button variant='default' onPress={props.onBackClick}>
               <View style={styles.homeButtonContent}>
-                <Image
-                  style={styles.homeButtonImage}
-                  source={require('./../assets/home.png')}
-                />
+                <AntDesign name='home' size={18} color={COLORS.primary500} />
                 <Text style={styles.homeButtonText}>Home</Text>
               </View>
             </Button>
@@ -59,6 +64,8 @@ const BMIResult = (props: IProps) => {
 };
 
 export default BMIResult;
+
+const deviceHeight = Dimensions.get('window').height;
 
 const styles = StyleSheet.create({
   container: {
@@ -73,7 +80,7 @@ const styles = StyleSheet.create({
   header: {
     marginTop: 20,
     width: 250,
-    gap: 20,
+    gap: deviceHeight > 700 ? 20 : 8,
   },
   headerInfo: {
     color: COLORS.text,
@@ -94,7 +101,7 @@ const styles = StyleSheet.create({
   },
   category: {
     borderRadius: 10,
-    shadowColor: COLORS.shadow,
+    shadowColor: 'black',
     shadowOffset: { width: 0, height: 0 },
     shadowOpacity: 0.2,
     shadowRadius: 8,
@@ -109,13 +116,13 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   homeButton: {
-    marginTop: 18,
-    marginBottom: 22,
+    marginTop: deviceHeight > 700 ? 18 : 8,
+    marginBottom: deviceHeight > 700 ? 30 : 22,
     width: 120,
   },
   homeButtonContent: {
     flexDirection: 'row',
-    gap: 8,
+    gap: 12,
     paddingVertical: 12,
     alignItems: 'center',
   },
@@ -130,5 +137,6 @@ const styles = StyleSheet.create({
   },
   safeAreaView: {
     alignItems: 'center',
+    paddingTop: Platform.select({ ios: 0, android: 25 }),
   },
 });

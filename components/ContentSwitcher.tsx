@@ -51,9 +51,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   btnTextSelected: {
-    backgroundColor: '#029b9d',
+    backgroundColor: COLORS.bgLight,
     borderColor: COLORS.bgLight,
     borderRadius: 14,
-    overflow: 'hidden'
+    overflow: 'hidden',
+    color: COLORS.secondary500
   },
 });

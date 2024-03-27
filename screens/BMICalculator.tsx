@@ -1,4 +1,13 @@
-import { StyleSheet, View, Alert, SafeAreaView } from 'react-native';
+import {
+  StyleSheet,
+  View,
+  Alert,
+  SafeAreaView,
+  KeyboardAvoidingView,
+  Dimensions,
+  ScrollView,
+  Platform,
+} from 'react-native';
 import { useState } from 'react';
 
 import GradientHoc from '../components/GradientHoc';
@@ -75,62 +84,76 @@ const BMICalculator = (props: IProps) => {
     }
     props.onCalculateBMI(parsedAge, parsedHeight / 100, parsedWeight, gender);
   };
+
   const HeightComponent = unitSet === 'Metric' ? Input : InputForFeetInches;
+
   return (
     <View style={styles.container}>
-      <GradientHoc>
-        <SafeAreaView style={styles.safeAreaView}>
-          <ContentSwitcher
-            selected={unitSet}
-            onChange={unitsChangeHandler}
-            options={['Standard', 'Metric']}
-          />
-          <View style={styles.inputs}>
-            <Input
-              value={age}
-              label='Age'
-              unit='years'
-              onChange={ageChangeHandler}
-            />
-            <Input
-              value={weight}
-              label='Weight'
-              unit={unitSet === 'Metric' ? 'kg' : 'pounds'}
-              onChange={weightChangeHandler}
-            />
-            <HeightComponent
-              value={height}
-              label='Height'
-              unit='cm'
-              onChange={heightChangeHandler}
-            />
-            <RadioGroup
-              value={gender}
-              label='Gender'
-              options={['Male', 'Female']}
-              onChange={genderChangeHandler}
-            />
-          </View>
-          <ActionButtons
-            onCalculate={calculateHandler}
-            onReset={resetHandler}
-          />
-        </SafeAreaView>
-      </GradientHoc>
+      <ScrollView style={styles.screen} bounces={false}>
+        <KeyboardAvoidingView
+          style={[
+            styles.screen,
+            { paddingBottom: Platform.select({ ios: 0, android: 20 }) },
+          ]}
+          behavior='position'
+        >
+          <GradientHoc>
+            <SafeAreaView style={styles.safeAreaView}>
+              <ContentSwitcher
+                selected={unitSet}
+                onChange={unitsChangeHandler}
+                options={['Standard', 'Metric']}
+              />
+              <View style={styles.inputs}>
+                <Input
+                  value={age}
+                  label='Age'
+                  unit='years'
+                  onChange={ageChangeHandler}
+                />
+                <Input
+                  value={weight}
+                  label='Weight'
+                  unit={unitSet === 'Metric' ? 'kg' : 'pounds'}
+                  onChange={weightChangeHandler}
+                />
+                <HeightComponent
+                  value={height}
+                  label='Height'
+                  unit='cm'
+                  onChange={heightChangeHandler}
+                />
+                <RadioGroup
+                  value={gender}
+                  label='Gender'
+                  options={['Male', 'Female']}
+                  onChange={genderChangeHandler}
+                />
+              </View>
+              <ActionButtons
+                onCalculate={calculateHandler}
+                onReset={resetHandler}
+              />
+            </SafeAreaView>
+          </GradientHoc>
+        </KeyboardAvoidingView>
+      </ScrollView>
       <Footer />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  screen: {
+    flex: 1,
+  },
   container: {
-    elevation: 5,
     shadowColor: 'black',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.5,
     shadowRadius: 10,
-    justifyContent: 'space-between',
     flex: 1,
+    justifyContent: 'space-between',
   },
   inputs: {
     width: 320,
@@ -165,7 +188,9 @@ const styles = StyleSheet.create({
   },
   safeAreaView: {
     alignItems: 'center',
-  }
+    flex: 1,
+    paddingTop: Platform.select({ ios: 0, android: 10 }),
+  },
 });
 
 export default BMICalculator;

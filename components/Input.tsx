@@ -1,4 +1,4 @@
-import { StyleSheet, TextInput, View, Text } from 'react-native';
+import { StyleSheet, TextInput, View, Text, Dimensions } from 'react-native';
 
 import COLORS from '../constants/colors';
 
@@ -28,13 +28,15 @@ const Input = (props: IProps) => {
   );
 };
 
+const deviceHeight = Dimensions.get('window').height;
+
 const styles = StyleSheet.create({
   textInputWrapper: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingHorizontal: 10,
-    paddingVertical: 5,
+    paddingVertical: deviceHeight > 700 ? 5 : 0,
     width: '100%',
     gap: 10,
   },

@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, Dimensions } from 'react-native';
 import COLORS from '../../constants/colors';
 
 interface IProps {
@@ -33,10 +33,12 @@ const BMIChart = (props: IProps) => {
 
 export default BMIChart;
 
+const deviceHeight = Dimensions.get('window').height;
+
 const styles = StyleSheet.create({
   bmiChart: {
     width: 280,
-    marginTop: 40,
+    marginTop: deviceHeight > 700 ? 40 : 25,
     marginBottom: 14,
     paddingHorizontal: 10,
     gap: 10,

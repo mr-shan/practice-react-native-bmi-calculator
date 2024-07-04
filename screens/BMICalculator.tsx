@@ -7,7 +7,7 @@ import {
   useWindowDimensions,
   ScrollView,
   Platform,
-  StyleProp
+  StyleProp,
 } from 'react-native';
 import { useState } from 'react';
 
@@ -22,6 +22,7 @@ import Footer from '../components/Footer';
 import COLORS from '../constants/colors';
 
 import { validateInputs } from '../helper';
+import AnimatedContainer from '../components/Animated/Container';
 
 interface IProps {
   onCalculateBMI: (
@@ -38,6 +39,7 @@ const BMICalculator = (props: IProps) => {
   const [height, setHeight] = useState<string>('');
   const [weight, setWeight] = useState<string>('');
   const [gender, setGender] = useState('Male');
+  const [calculationsDone, setCalculationsDone] = useState(false);
   const windowDimensions = useWindowDimensions();
 
   const parseNumberAndSetProperty = (
@@ -84,7 +86,10 @@ const BMICalculator = (props: IProps) => {
       Alert.alert('Invalid Inputs', errorMessage);
       return;
     }
-    props.onCalculateBMI(parsedAge, parsedHeight / 100, parsedWeight, gender);
+    setCalculationsDone(true)
+    setTimeout(() => {
+      props.onCalculateBMI(parsedAge, parsedHeight / 100, parsedWeight, gender);
+    }, 400)
   };
 
   const HeightComponent = unitSet === 'Metric' ? Input : InputForFeetInches;
@@ -92,16 +97,19 @@ const BMICalculator = (props: IProps) => {
   const orientation =
     windowDimensions.height > windowDimensions.width ? 'portrait' : 'landscape';
 
-  const containerStyle: StyleProp<any> = orientation === 'landscape' ? {
-    flexDirection: 'row',
-  } : {
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-  }
+  const containerStyle: StyleProp<any> =
+    orientation === 'landscape'
+      ? {
+          flexDirection: 'row',
+        }
+      : {
+          flexDirection: 'column',
+          justifyContent: 'space-between',
+        };
 
   return (
     <View style={[styles.container, containerStyle]}>
-      <ScrollView style={styles.screen} bounces={false}>
+      <ScrollView style={styles.screen}>
         <KeyboardAvoidingView
           style={[
             styles.screen,
@@ -109,45 +117,47 @@ const BMICalculator = (props: IProps) => {
           ]}
           behavior='position'
         >
-          <GradientHoc>
-            <SafeAreaView style={styles.safeAreaView}>
-              <ContentSwitcher
-                selected={unitSet}
-                onChange={unitsChangeHandler}
-                options={['Standard', 'Metric']}
-              />
-              <View style={styles.inputs}>
-                <Input
-                  value={age}
-                  label='Age'
-                  unit='years'
-                  onChange={ageChangeHandler}
+          <AnimatedContainer type={calculationsDone ? 'exit' : 'entry'}>
+            <GradientHoc>
+              <SafeAreaView style={styles.safeAreaView}>
+                <ContentSwitcher
+                  selected={unitSet}
+                  onChange={unitsChangeHandler}
+                  options={['Standard', 'Metric']}
                 />
-                <Input
-                  value={weight}
-                  label='Weight'
-                  unit={unitSet === 'Metric' ? 'kg' : 'pounds'}
-                  onChange={weightChangeHandler}
+                <View style={styles.inputs}>
+                  <Input
+                    value={age}
+                    label='Age'
+                    unit='years'
+                    onChange={ageChangeHandler}
+                  />
+                  <Input
+                    value={weight}
+                    label='Weight'
+                    unit={unitSet === 'Metric' ? 'kg' : 'pounds'}
+                    onChange={weightChangeHandler}
+                  />
+                  <HeightComponent
+                    value={height}
+                    label='Height'
+                    unit='cm'
+                    onChange={heightChangeHandler}
+                  />
+                  <RadioGroup
+                    value={gender}
+                    label='Gender'
+                    options={['Male', 'Female']}
+                    onChange={genderChangeHandler}
+                  />
+                </View>
+                <ActionButtons
+                  onCalculate={calculateHandler}
+                  onReset={resetHandler}
                 />
-                <HeightComponent
-                  value={height}
-                  label='Height'
-                  unit='cm'
-                  onChange={heightChangeHandler}
-                />
-                <RadioGroup
-                  value={gender}
-                  label='Gender'
-                  options={['Male', 'Female']}
-                  onChange={genderChangeHandler}
-                />
-              </View>
-              <ActionButtons
-                onCalculate={calculateHandler}
-                onReset={resetHandler}
-              />
-            </SafeAreaView>
-          </GradientHoc>
+              </SafeAreaView>
+            </GradientHoc>
+          </AnimatedContainer>
         </KeyboardAvoidingView>
       </ScrollView>
       {orientation === 'portrait' && <Footer />}

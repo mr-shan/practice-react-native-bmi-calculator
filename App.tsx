@@ -22,7 +22,6 @@ export default function App() {
     try {
       const bmiVal = calculateBMI(weight, height, age, gender);
       setBmi(bmiVal);
-      console.log(bmiVal);
       setAppState(1);
     } catch (error) {
       Alert.alert(
@@ -46,7 +45,7 @@ export default function App() {
   return (
     <View style={styles.flexOne}>
       { CurrentScreen }
-      <StatusBar style='dark' />
+      <StatusBar style='light' />
     </View>
   );
 }

@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   StyleSheet,
   View,
@@ -17,6 +18,7 @@ import { AntDesign } from '@expo/vector-icons';
 
 import { getBmiCategoryData } from '../helper';
 import COLORS from '../constants/colors';
+import AnimatedContainer from '../components/Animated/Container';
 
 interface IProps {
   bmi: number;
@@ -28,8 +30,16 @@ const BMIResult = (props: IProps) => {
     props.onBackClick();
     return <></>;
   }
+  const [resultDone, setResultDone] = React.useState(false)
   const windowDimensions = useWindowDimensions();
   const bmiCategory = getBmiCategoryData(props.bmi);
+
+  const goToHomeHandler = () => {
+    setResultDone(true)
+    setTimeout(() => {
+      props.onBackClick();
+    }, 400)
+  }
 
   const categoryStyle = {
     backgroundColor: bmiCategory.background,
@@ -52,28 +62,30 @@ const BMIResult = (props: IProps) => {
 
   return (
     <View style={styles.container}>
-      <GradientHoc>
-        <SafeAreaView style={[styles.safeAreaView, containerStyle]}>
-          <View style={styles.header}>
-            <Text style={styles.headerInfo}>Your body mass index is:</Text>
-            <Text style={styles.headerTitle}>{props.bmi}</Text>
-            <View style={styles.category}>
-              <Text style={[styles.categoryText, categoryStyle]}>
-                {bmiCategory.type}
-              </Text>
-            </View>
-          </View>
-          <BMIChart selected={bmiCategory.type} />
-          <View style={styles.homeButton}>
-            <Button variant='default' onPress={props.onBackClick}>
-              <View style={styles.homeButtonContent}>
-                <AntDesign name='home' size={18} color={COLORS.primary500} />
-                <Text style={styles.homeButtonText}>Home</Text>
+      <AnimatedContainer type={resultDone ? 'exit' : 'entry'}>
+        <GradientHoc>
+          <SafeAreaView style={[styles.safeAreaView, containerStyle]}>
+            <View style={styles.header}>
+              <Text style={styles.headerInfo}>Your body mass index is:</Text>
+              <Text style={styles.headerTitle}>{props.bmi}</Text>
+              <View style={styles.category}>
+                <Text style={[styles.categoryText, categoryStyle]}>
+                  {bmiCategory.type}
+                </Text>
               </View>
-            </Button>
-          </View>
-        </SafeAreaView>
-      </GradientHoc>
+            </View>
+            <BMIChart selected={bmiCategory.type} />
+            <View style={styles.homeButton}>
+              <Button variant='default' onPress={goToHomeHandler}>
+                <View style={styles.homeButtonContent}>
+                  <AntDesign name='home' size={18} color={COLORS.primary500} />
+                  <Text style={styles.homeButtonText}>Home</Text>
+                </View>
+              </Button>
+            </View>
+          </SafeAreaView>
+        </GradientHoc>
+      </AnimatedContainer>
       {orientation === 'portrait' && <Footer />}
     </View>
   );
